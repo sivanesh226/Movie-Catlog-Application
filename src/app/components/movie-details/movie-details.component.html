@@ -1,0 +1,86 @@
+<div class="details-bg">
+    <div class="movie-details-container" *ngIf="movie && (!pageLoader)">
+        <div class="iframe-container" *ngIf="showVideo">
+            <iframe class="video-frame" #videoFrame [src]="safeVideoUrl" frameborder=" 0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+            </iframe>
+        </div>
+        <mat-card style="background-color: transparent;">
+            <div class="d-flex justifi-content-center">
+                <div
+                    class="col-sm-0 col-md-4 col-lg-3 d-flex justify-content-center align-items-center movie-poster-container1">
+                    <img class="movie-poster" [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+                        onerror="this.onerror=null; this.src='https://icon-library.com/images/unknown-person-icon/unknown-person-icon-4.jpg';"
+                        alt="{{ movie.title }}" />
+                </div>
+                <div class="col-sm-12 col-md-8 col-lg-9" style="overflow: hidden; color: white;">
+                    <mat-card-content class="content" style="background-color: transparent;">
+                        <h2 class="title">{{ movie.title }}</h2>
+                        <p class="description">{{ movie.overview }}</p>
+                        <p class="description"><strong>Release Date:</strong>
+                            {{ movie.release_date | date: 'longDate'}}</p>
+                        <div class=""><strong>Genres:</strong>
+                            <mat-chip-set>
+                                <mat-chip *ngFor="let genre of movie.genres">{{ genre.name}}</mat-chip>
+                            </mat-chip-set>
+                        </div>
+                        <div class="description"><strong>Rating:</strong>
+                            <div class="stars">
+                                <ng-container *ngFor="let star of stars">
+                                    <span *ngIf="star === 'full'" class="star full">&#9733;</span>
+                                    <span *ngIf="star === 'half'" class="star half">&#9734;&#9733;</span>
+                                    <span *ngIf="star === 'empty'" class="star empty">&#9734;</span>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <button mat-icon-button (click)="toggleFavorite(movie,$event)">
+                            <mat-icon [ngStyle]="{ 'color': (movie.isFavorite ? 'red' : 'rgba(255,255,255,.3)') }">{{
+                                movie.isFavorite ? 'favorite' : 'favorite_border'
+                                }}</mat-icon>
+                        </button>{{movie.isFavorite ? "Favorite" : "Unfavorite"}}
+                    </mat-card-content>
+                </div>
+            </div>
+        </mat-card>
+        <div class="" style="overflow: hidden; width: 100%;">
+            <div class="movie-container" *ngIf="movieCastList.length">
+                <div class="collection-heading">
+                    <label>Cast</label>
+                </div>
+                <div class="d-flex ms-md-5 ms-sm-3 ms-lg-5">
+                    <div class="movie-poster-container" *ngFor="let person of movieCastList">
+                        <img class="movie-posters" [src]="'https://image.tmdb.org/t/p/w500/'+ person.profile_path"
+                            onerror="this.onerror=null; this.src='https://www.shutterstock.com/image-vector/no-image-available-icon-flat-260nw-1240855801.jpg';"
+                            alt="{{ person.original_name }}" />
+                        <label style="color: white;">{{ person.original_name }}</label><br>
+                        <label style="color: rgba(255,255,255,.6);">{{ person.character }}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-container" *ngIf="movieCrewList.length">
+                <div class="collection-heading">
+                    <label>Crew</label>
+                </div>
+                <div class="d-flex ms-md-5 ms-sm-3 ms-lg-5">
+                    <div class="movie-poster-container" *ngFor="let person of movieCrewList">
+                        <img class="movie-posters" [src]="'https://image.tmdb.org/t/p/w500/'+person.profile_path"
+                            onerror="this.onerror=null; this.src='https://www.shutterstock.com/image-vector/no-image-available-icon-flat-260nw-1240855801.jpg';"
+                            alt="{{ person.original_name }}" />
+                        <label style="color: white;">{{ person.original_name }}</label><br>
+                        <label style="color: rgba(255,255,255,.6);">{{ person.job }}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <button mat-raised-button color="primary" routerLink="/">Back to List</button> -->
+    </div>
+    <div class="h-100 w-100 d-flex justify-content-center align-items-center" *ngIf="(!movie)&& (!pageLoader)">
+        <h2 style="color: rgba(255, 255, 255, .6);">Oops! Unable To Get Movies At This Moment </h2>
+    </div>
+    <div class="h-100 w-100 d-flex justify-content-center align-items-center" *ngIf="pageLoader">
+        <mat-spinner></mat-spinner>
+    </div>
+
+</div>
