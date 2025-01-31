@@ -16,7 +16,7 @@ Installation Steps
 2.	git clone https://github.com/sivanesh226/Movie-Catlog-Application
 3.	Install dependencies:
 npm install
-4.	Obtain an API key from the TMDb API provider and add it to the environment file. Get TMDb API key [here](https://developer.themoviedb.org/docs/getting-started).
+4.	Obtain an API key from the TMDb API provider and add it to the environment file. Get TMDb API key here.
 5.	Start the development server:
 ng serve
 6.	Open your browser and navigate to http://localhost:4200
@@ -33,6 +33,6 @@ Error Handling
 Bonus Features (Optional)
 ✔️ Mark movies as favorites (stored in local storage) ✔️ Sort movies by release year, rating, or title ✔️ Deployed on AWS EC2 Instance
 Live Demo
-The app is deployed at: https://smartflix.tech
+The app is deployed at: Live Link
 ________________________________________
 
