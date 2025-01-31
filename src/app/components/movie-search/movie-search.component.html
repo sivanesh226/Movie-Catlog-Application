@@ -1,0 +1,21 @@
+<div class="px-5 mt-4">
+    <div class="movie-grid">
+        <mat-card *ngFor="let movie of movies" class="movie-card" (click)="showMovieDetails(movie.id)">
+            <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}"
+                onerror="this.onerror=null; this.src='https://www.shutterstock.com/image-vector/no-image-available-icon-flat-260nw-1240855801.jpg';" />
+            <div class="favorite-box">
+                <button mat-icon-button (click)="toggleFavorite(movie,$event)">
+                    <mat-icon [ngStyle]="{ 'color': (movie.isFavorite ? 'red' : 'rgba(255,255,255,.6)') } ">
+                        {{ movie.isFavorite ? 'favorite' : 'favorite_border' }}
+                    </mat-icon>
+                </button>
+            </div>
+        </mat-card>
+    </div>
+    <div class="h-100 w-100 d-flex justify-content-center align-items-center" *ngIf="(!movies.length)&& (!pageLoader)">
+        <h2 style="color: rgba(255, 255, 255, .6);">No video found for this keyword </h2>
+    </div>
+    <div class="h-100 w-100 d-flex justify-content-center align-items-center" *ngIf="pageLoader">
+        <mat-spinner></mat-spinner>
+    </div>
+</div>

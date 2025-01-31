@@ -1,0 +1,136 @@
+<div class="home-bg" *ngIf="search">
+    <div class="iframe-container" *ngIf="showVideo">
+
+        <iframe class="video-frame" #videoFrame [src]="safeVideoUrl" frameborder=" 0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+        </iframe>
+
+    </div>
+
+    <div class="video-overlay" #videoOverlay>
+        <div class="movie-title">{{randomMovie.title}}</div>
+        <div class="movie-description">{{randomMovie.overview}}</div>
+    </div>
+
+    <div class="home-content" *ngIf="trendingMovieList.length">
+        <div class="movie-container">
+            <div class="collection-heading">
+                <label>Trending Movies</label>
+            </div>
+            <div class="d-flex ms-md-5 ms-sm-3 ms-lg-5">
+                <div class="movie-poster-container" *ngFor="let movie of trendingMovieList"
+                    (click)="showMovieDetails(movie.id)">
+
+                    <img class="movie-posters" [src]="'https://image.tmdb.org/t/p/w500/'+movie.poster_path"
+                        onerror="this.onerror=null; this.src='https://www.shutterstock.com/image-vector/no-image-available-icon-flat-260nw-1240855801.jpg';"
+                        alt="{{ movie.title }}" />
+                    <div class="favorite-box">
+                        <button mat-icon-button (click)="toggleFavorite(movie,$event)">
+                            <mat-icon [ngStyle]="{ 'color': (movie.isFavorite ? 'red' : 'rgba(255,255,255,.3)') }">{{
+                                movie.isFavorite ? 'favorite' : 'favorite_border'
+                                }}</mat-icon>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="movie-container" *ngIf="nowPlayingMovieList.length">
+            <div class="collection-heading">
+                <label>Now Playing Movies</label>
+            </div>
+            <div class="d-flex ms-md-5 ms-sm-3 ms-lg-5">
+                <div class="movie-poster-container" (click)="showMovieDetails(movie.id)"
+                    *ngFor="let movie of nowPlayingMovieList">
+
+                    <img class="movie-posters" [src]="'https://image.tmdb.org/t/p/w500/'+movie.poster_path"
+                        onerror="this.onerror=null; this.src='https://www.shutterstock.com/image-vector/no-image-available-icon-flat-260nw-1240855801.jpg';"
+                        alt="{{ movie.title }}" />
+
+                    <div class="favorite-box">
+                        <button mat-icon-button (click)="toggleFavorite(movie,$event)">
+                            <mat-icon [ngStyle]="{ 'color': (movie.isFavorite ? 'red' : 'rgba(255,255,255,.3)') }">{{
+                                movie.isFavorite ? 'favorite' : 'favorite_border'
+                                }}</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="movie-container" *ngIf="popularMovieList.length">
+            <div class="collection-heading">
+                <label>Popular Movies</label>
+            </div>
+            <div class="d-flex ms-md-5 ms-sm-3 ms-lg-5">
+                <div class="movie-poster-container" (click)="showMovieDetails(movie.id)"
+                    *ngFor="let movie of popularMovieList">
+
+                    <img class="movie-posters" [src]="'https://image.tmdb.org/t/p/w500/'+movie.poster_path"
+                        onerror="this.onerror=null; this.src='https://www.shutterstock.com/image-vector/no-image-available-icon-flat-260nw-1240855801.jpg';"
+                        alt="{{ movie.title }}" />
+                    <div class="favorite-box">
+                        <button mat-icon-button (click)="toggleFavorite(movie,$event)">
+                            <mat-icon style="background-color: rgba(0, 0, 0, .4);"
+                                [ngStyle]="{ 'color': (movie.isFavorite ? 'red' : 'rgba(255,255,255,.3)') }">{{
+                                movie.isFavorite ? 'favorite' : 'favorite_border'
+                                }}</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="movie-container" *ngIf="topRatedMovieList.length">
+            <div class="collection-heading">
+                <label>Top Rated Movies</label>
+            </div>
+            <div class="d-flex ms-md-5 ms-sm-3 ms-lg-5">
+                <div class="movie-poster-container" (click)="showMovieDetails(movie.id)"
+                    *ngFor="let movie of topRatedMovieList">
+
+                    <img class="movie-posters" [src]="'https://image.tmdb.org/t/p/w500/'+movie.poster_path"
+                        onerror="this.onerror=null; this.src='https://www.shutterstock.com/image-vector/no-image-available-icon-flat-260nw-1240855801.jpg';"
+                        alt="{{ movie.title }}" />
+                    <div class="favorite-box">
+                        <button mat-icon-button (click)="toggleFavorite(movie,$event)">
+                            <mat-icon [ngStyle]="{ 'color': (movie.isFavorite ? 'red' : 'rgba(255,255,255,.3)') }">{{
+                                movie.isFavorite ? 'favorite' : 'favorite_border'
+                                }}</mat-icon>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="movie-container" *ngIf="upcommingMovieList.length">
+            <div class="collection-heading">
+                <label>Upcomming Movies</label>
+            </div>
+            <div class="d-flex ms-md-5 ms-sm-3 ms-lg-5">
+                <div class="movie-poster-container" (click)="showMovieDetails(movie.id)"
+                    *ngFor="let movie of upcommingMovieList">
+
+                    <img class="movie-posters" [src]="'https://image.tmdb.org/t/p/w500/'+movie.poster_path"
+                        onerror="this.onerror=null; this.src='https://www.shutterstock.com/image-vector/no-image-available-icon-flat-260nw-1240855801.jpg';"
+                        alt="{{ movie.title }}" />
+                    <div class="favorite-box">
+                        <button mat-icon-button (click)="toggleFavorite(movie,$event)">
+                            <mat-icon [ngStyle]="{ 'color': (movie.isFavorite ? 'red' : 'rgba(255,255,255,.6)') } ">
+                                {{ movie.isFavorite ? 'favorite' : 'favorite_border' }}
+                            </mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="h-100 w-100 d-flex justify-content-center align-items-center" *ngIf="(!showVideo )&& (!pageLoader)">
+        <h2 style="color: rgba(255, 255, 255, .6);">Oops! Unable To Get Movies At This Moment </h2>
+    </div>
+    <div class="h-100 w-100 d-flex justify-content-center align-items-center" *ngIf="pageLoader">
+        <mat-spinner></mat-spinner>
+    </div>
+
+</div>

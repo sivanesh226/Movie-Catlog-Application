@@ -1,0 +1,31 @@
+<div class="nav d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+                <img class="logo"
+                        src="https://play-lh.googleusercontent.com/S26e20TGAbTGEeh4K3dbNm0N6pn-UKG2l1nXOTSvQ_vtpIAptLHmKLWiPKOz-816vAux">
+                <div class="links" *ngIf="profile">
+                        <a class="route-btn" routerLinkActive="active" routerLink="/home">Home</a>
+                        <a class="route-btn" routerLinkActive="active" routerLink="/favorites">Favorites</a>
+                </div>
+        </div>
+        <div class="d-flex align-items-center">
+                <div class="search-container">
+                        <mat-icon class="search-icon" (click)="activateSearch(true)">search</mat-icon>
+                        <input type="text" autofocus (input)="activatePopup(searchInput.value)"
+                                (blur)="activateSearch(false,searchInput.value)" class="search-input" #searchInput>
+                </div>
+                <div mat-button [matMenuTriggerFor]="menu" class="profile" *ngIf="profile">
+                        <img class="profile-img"
+                                src="https://cdn-icons-png.freepik.com/512/6218/6218538.png"><label>{{profile.name}}</label>
+                </div>
+        </div>
+
+        <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="logout()">
+                        <span>Logout</span>
+                </button>
+
+        </mat-menu>
+</div>
+<div class="popup" *ngIf="isSearchPopupActive">
+        <app-movie-search [srchTxt]="searchInput.value"></app-movie-search>
+</div>

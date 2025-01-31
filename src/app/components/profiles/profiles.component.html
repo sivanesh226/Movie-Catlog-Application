@@ -1,0 +1,23 @@
+<div class="profile-bg">
+    <div class="d-flex justify-content-center align-items-center flex-wrap" style="height: 100%;">
+        <div *ngFor="let profile of profiles" class="profile-box d-flex flex-column align-items-center"
+            (click)="activateProfile( profile.name )">
+            <!-- <mat-icon
+                style="font-size: 120px;color: white; height: 120px; width: 120px; border-radius: 100%;">person_outline</mat-icon> -->
+            <div class="delete-btn"><mat-icon (click)="deleteProfile( profile.name )" class="delete-icon"
+                    style="color: rgba(255,255,255,.7)">delete</mat-icon>
+            </div>
+            <img class="avatar" src="https://cdn-icons-png.freepik.com/512/6218/6218538.png">
+            <label>{{ profile.name }}</label>
+        </div>
+        <div *ngIf="showAddProfileBox" class="profile-box add-profile-box d-flex flex-column align-items-center">
+            <img class="avatar" src="https://cdn-icons-png.freepik.com/512/6218/6218538.png">
+            <input type="text" autofocus class="profile-input" #profileName (blur)="addProfile(profileName.value)">
+        </div>
+        <div *ngIf="!showAddProfileBox" class="profile-box d-flex flex-column align-items-center"
+            (click)="this.showAddProfileBox = true;">
+            <mat-icon class="add-icon">add_outline</mat-icon>
+            <label>Add Profile</label>
+        </div>
+    </div>
+</div>

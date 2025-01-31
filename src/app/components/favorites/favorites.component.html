@@ -1,0 +1,48 @@
+<div class="px-5 favorites-bg ">
+    <div class=" " *ngIf="(!isFavoriteListEmpty) && (!pageLoader)">
+        <div class="container d-flex justify-content-between align-items-center flex-wrap">
+            <div class="">
+                <label class="label">My Favorite Movies</label>
+            </div>
+            <div class="">
+                <mat-form-field appearance="outline" style="margin: 5px 20px; ">
+                    <mat-label>Genere</mat-label>
+                    <mat-select [(value)]="selectedGenereId">
+                        <mat-option *ngFor="let genere of genresList" [value]="genere.id"
+                            (click)="filterMovies()">{{genere.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="ml-2 " style="margin: 5px 20px; ">
+                    <mat-label>Sort By</mat-label>
+                    <mat-select [(value)]="sortBy" (selectionChange)="sortMovies()">
+                        <mat-option value="title">Title</mat-option>
+                        <mat-option value="rating">Rating</mat-option>
+                        <mat-option value="releaseYear">Release Year</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+        </div>
+        <div class="movie-grid container">
+            <mat-card *ngFor="let movie of displayMovies" class="movie-card" (click)="showMovieDetails(movie.id)">
+                <!-- <div class="" style="height: 0px; z-index: 100;">
+            <button mat-icon-button (click)="toggleFavorite1(movie)">
+                <mat-icon style="color: white;">{{ movie.isFavorite ? 'favorite' : 'favorite_border' }}</mat-icon>
+            </button>
+        </div> -->
+                <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}"
+                    onerror="this.onerror=null; this.src='https://www.shutterstock.com/image-vector/no-image-available-icon-flat-260nw-1240855801.jpg';" />
+
+            </mat-card>
+        </div>
+        <mat-paginator class="paginator" [length]="filteredFavoriteMovies.length" (page)="handlePagination($event)"
+            [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+        </mat-paginator>
+    </div>
+    <div class="h-100 w-100 d-flex justify-content-center align-items-center" *ngIf="isFavoriteListEmpty">
+        <h2 style="color: rgba(255, 255, 255, .6);">Favorite Movie list is Empty</h2>
+    </div>
+    <div class="h-100 w-100 d-flex justify-content-center align-items-center" *ngIf="pageLoader">
+        <mat-spinner></mat-spinner>
+    </div>
+</div>

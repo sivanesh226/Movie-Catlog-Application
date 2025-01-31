@@ -1,0 +1,83 @@
+.profile-bg {
+    /* background-color: black; */
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
+
+.avatar {
+    height: 120px;
+    width: 120px;
+    padding: 20px;
+    border-radius: 100%;
+}
+
+.profile-box {
+    margin: 10px;
+    padding: 10px;
+    height: 180px;
+    transition: 0.5s;
+    border-radius: 20px;
+}
+
+.profile-box:hover {
+    background-color: rgba(255, 255, 255, .2);
+}
+
+.profile-box:hover .delete-btn {
+    display: block;
+    /* justify-content: end; */
+}
+
+label {
+    font-size: 20px;
+    color: rgba(255, 255, 255, .85);
+    font-weight: bold;
+}
+
+.add-icon {
+    font-size: 120px;
+    color: rgba(255, 255, 255, .85);
+    height: 120px;
+    width: 120px;
+    border-radius: 100%;
+}
+
+.profile-input {
+    border: 2px solid rgba(255, 255, 255, .6);
+    border-radius: 10px;
+    font-size: 20px;
+    width: 100px;
+    background-color: black;
+    height: 30px;
+    color: rgba(255, 255, 255, .85);
+    font-weight: bold;
+    text-align: center;
+}
+
+.add-profile-box {
+    /* height: 200px;
+    width: 300px; */
+}
+
+.delete-btn {
+    height: 0px;
+    display: none;
+    width: 120px;
+    text-align: right;
+
+}
+
+.delete-icon {
+    border-radius: 100%;
+    transition: .5s;
+}
+
+.delete-icon:hover {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, .5);
+    background-color: rgba(255, 255, 255, .85);
+    color: rgb(185, 0, 0) !important;
+    transform: scale(1.5);
+
+}
